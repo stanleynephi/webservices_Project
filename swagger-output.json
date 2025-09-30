@@ -9,6 +9,10 @@
     {
       "url": "http://localhost:8080/",
       "description": "Shopify API Documentation. Use this when testing locally."
+    },
+    {
+      "url": "https://webservices-project-rufi.onrender.com/",
+      "description": "Shopify API Documentation. Use this when testing on a live server"
     }
   ],
   "paths": {
@@ -78,6 +82,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         },
         "requestBody": {
@@ -124,6 +131,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         },
         "requestBody": {

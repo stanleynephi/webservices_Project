@@ -12,6 +12,11 @@ const doc = {
       url: "http://localhost:8080/",
       description: "Shopify API Documentation. Use this when testing locally.",
     },
+    {
+      url: "https://webservices-project-rufi.onrender.com/",
+      description:
+        "Shopify API Documentation. Use this when testing on a live server",
+    },
   ],
 }
 
