@@ -1,0 +1,4 @@
+##ignore the following files upon commit and push
+node_modules
+.env
+.vscode
