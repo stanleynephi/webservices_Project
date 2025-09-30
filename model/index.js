@@ -162,5 +162,3 @@ module.exports = {
   newProduct,
   updateProduct,
 }
-
-//get all item
