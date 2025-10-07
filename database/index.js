@@ -11,13 +11,26 @@ const client = new MongoClient(uri)
 //async function to run
 async function run() {
   try {
+    await client.connect()
     const database = client.db("project01")
     if (database) {
       console.log("database connection established")
     }
 
-    const shops = database.collection("shopify")
-    return shops
+    const collections = await database.listCollections().toArray()
+    const name = collections.map((c) => c.name)
+
+    if (!name.includes("shopify")) {
+      await database.createCollection("shopify")
+      console.log("Shopify collection created")
+    }
+
+    if (!name.includes("user")) {
+      await database.createCollection("user")
+      console.log("User collection created")
+    }
+
+    return database
   } catch (error) {
     console.log(error)
   }
