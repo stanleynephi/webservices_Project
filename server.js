@@ -17,6 +17,9 @@ const port = process.env.Port || 8080
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+//cors set up
+app.use(cors())
+
 //set up the route for the
 app.use(
   sessions({
