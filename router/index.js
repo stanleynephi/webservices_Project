@@ -1,13 +1,7 @@
 const router = require("express").Router()
 const controller = require("../controller")
-const swaggerUI = require("swagger-ui-express")
-const swaggerDocumentation = require("../swagger-output.json")
 const validation = require("../util/index")
 const authenticate = require("../util/authenticate")
-
-//swagger set up
-router.use("/api-documentation", swaggerUI.serve)
-router.get("/api-documentation", swaggerUI.setup(swaggerDocumentation))
 
 //set up router using http verb and export
 //this router gets all the data found in the database

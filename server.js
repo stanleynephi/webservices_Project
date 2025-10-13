@@ -7,6 +7,12 @@ const cors = require("cors")
 const passportStrategies = require("passport-github2").Strategy
 const sessions = require("express-session")
 const createError = require("http-errors")
+const swaggerUI = require("swagger-ui-express")
+const swaggerDocumentation = require("./swagger-output.json")
+const authenticate = require("./util/authenticate")
+const user = require("./router/user")
+const shop = require("./router/shop")
+const product = require("./router/index")
 require("dotenv").config()
 
 //port and host
@@ -34,12 +40,16 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
-//router for the user routes and main route
-// app.use("/", (req, res) => {
-//   res.send("Welcome to the product api")
-// })
-app.use("/", require("./router/index"))
-app.use("/user", require("./router/user"))
+//swagger setup
+app.use(
+  "/api-documentation",
+  swaggerUI.serve,
+  swaggerUI.setup(swaggerDocumentation)
+)
+
+app.use("/products", product)
+app.use("/user", user)
+app.use("/shops", shop)
 
 //set up passport in the application
 passport.use(

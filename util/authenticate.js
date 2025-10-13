@@ -3,7 +3,9 @@ const isAuthenticate = (req, res, next) => {
   if (!req.session.user) {
     return res
       .status(401)
-      .json("You do not have access to visit this route. Thank you.")
+      .json(
+        "You do not have access to visit this route. Thank you. Visit '/user/login'"
+      )
   }
 
   next()

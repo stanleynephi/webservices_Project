@@ -7,6 +7,7 @@ const doc = {
     title: "Shopify API",
     description: "API Documentation for Shopify Project",
   },
+
   servers: [
     {
       url: "http://localhost:8080/",
@@ -22,7 +23,7 @@ const doc = {
 
 //create a file to handle the output data sent and a route to the router file for the project
 const outputFile = "./swagger-output.json"
-const route = ["./router/index.js"]
+const route = ["./server.js"]
 
 //export and trigger the function
 swaggerAutogen(outputFile, route, doc)
