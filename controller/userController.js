@@ -55,9 +55,11 @@ controller.allUsers = async function (req, res, next) {
 
 /**get user by id */
 controller.userByID = async function (req, res, next) {
-  const userGitID = req.usergitID
+  const userid = req.params.userid
+  console.log(userid)
   /**pass it to the model to query the db */
-  const result = await model.existingUser(userGitID)
+  const result = await model.getuserById(userid)
+  console.log(result)
   res.status(200).json(result)
   return result
 }

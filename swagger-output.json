@@ -199,12 +199,12 @@
         }
       }
     },
-    "/user/getuserById/{userId}": {
+    "/user/getuserById/{userid}": {
       "get": {
         "description": "",
         "parameters": [
           {
-            "name": "userId",
+            "name": "userid",
             "in": "path",
             "required": true,
             "schema": {

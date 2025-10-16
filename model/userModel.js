@@ -82,8 +82,41 @@ const getAllUsers = async function () {
   return data
 }
 
+const getuserById = async function (userid) {
+  try {
+    //pass the id to the object model
+    console.log(userid)
+    const database = client.db("project01")
+    const collection = database.collection("user")
+
+    let _ID
+
+    _ID = new ObjectId(userid)
+    console.log(_ID)
+
+    //find in the collection
+    if (!collection) {
+      console.log("No collection available")
+      return []
+    }
+
+    const user = await collection.findOne({ _id: _ID })
+    console.log("this is the data found for the user", user)
+
+    if (!user) {
+      console.log("No user found with this ID")
+      throw createError(404, "No user with the id found")
+    }
+
+    return user
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
+}
 module.exports = {
   addnewUser,
   existingUser,
   getAllUsers,
+  getuserById,
 }
