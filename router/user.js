@@ -16,7 +16,7 @@ router.get("/allusers", authenticate.isAuthenticate, controller.allUsers)
 
 /**get user by id */
 router.get(
-  "/getuserById/:userId",
+  "/getuserById/:usergitID",
   authenticate.isAuthenticate,
   controller.userByID
 )
