@@ -42,6 +42,25 @@ const addnewUser = async function (userdata) {
   return result
 }
 
+/**model to check for exiting user in the collection using the provided id and profile infromation*/
+const existingUser = async function (user) {
+  try {
+    const database = client.db("project01")
+    const collection = database.collection("user")
+
+    if (!collection) {
+      console.log(`Collection not found in the database`)
+      return
+    }
+
+    const result = await collection.findOne({ usergitID: user.usergitID })
+    return result
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 module.exports = {
   addnewUser,
+  existingUser,
 }

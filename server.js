@@ -13,6 +13,7 @@ const authenticate = require("./util/authenticate")
 const user = require("./router/user")
 const shop = require("./router/shop")
 const product = require("./router/index")
+const userModel = require("./model/userModel")
 require("dotenv").config()
 
 //port and host
@@ -32,7 +33,7 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     name: "sessionId",
-    saveUninitialized: false,
+    saveUninitialized: true,
   })
 )
 
@@ -50,6 +51,7 @@ app.use(
 app.use("/products", product)
 app.use("/user", user)
 app.use("/shops", shop)
+app.use("/logout", require("./controller/userController").logout)
 
 //set up passport in the application
 passport.use(
@@ -60,7 +62,9 @@ passport.use(
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
       callbackURL: process.env.CALLBACK_URL,
     },
-    function (accessToken, refreshToken, profile, done) {
+    async function (accessToken, refreshToken, profile, done) {
+      console.log(`This is the user profile`, profile)
+      /**create a new user in the database using the profile given */
       return done(null, profile)
       //})
     }

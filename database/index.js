@@ -30,9 +30,9 @@ async function run() {
       console.log("User collection created")
     }
 
-    if (!name.includes("shops")) {
-      await database.createCollection("shops")
-      console.log("Shops collection created")
+    if (!name.includes("shop")) {
+      await database.createCollection("shop")
+      console.log("Shop collection created")
     }
     return database
   } catch (error) {
