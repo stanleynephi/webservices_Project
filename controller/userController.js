@@ -40,4 +40,28 @@ controller.logout = (req, res) => {
   })
 }
 
+/**get all users in the collection */
+controller.allUsers = async function (req, res, next) {
+  //get all the items in the shop {
+  try {
+    const users = await model.getAllUsers()
+    res.status(200).json(users)
+    return users
+  } catch (error) {
+    console.log(error)
+    next(error)
+  }
+}
+
+/**get user by id */
+controller.userByID = async function (req, res, next) {
+  const userGitID = req.userId
+  /**pass it to the model to query the db */
+  const result = await model.existingUser(userGitID)
+
+  if (result) {
+    res.status(200).json(result)
+    return result
+  }
+}
 module.exports = controller

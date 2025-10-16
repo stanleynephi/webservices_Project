@@ -51,6 +51,10 @@ app.use(
 app.use("/products", product)
 app.use("/user", user)
 app.use("/shops", shop)
+
+/**
+ *  #swagger.ignore = true
+ */
 app.use("/logout", require("./controller/userController").logout)
 
 //set up passport in the application

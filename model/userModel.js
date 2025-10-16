@@ -2,6 +2,7 @@
 const { client } = require("../database/index")
 const createError = require("http-errors")
 const { ObjectId } = require("mongodb")
+const { getallItems } = require("../controller")
 
 //list all the collections in the database
 const listAllCollection = async function () {
@@ -60,7 +61,29 @@ const existingUser = async function (user) {
   }
 }
 
+//retrieve all the data in the shops
+const getAllUsers = async function () {
+  //connect to database and the connect to the client
+  const database = client.db("project01")
+  const collection = database.collection("user")
+
+  if (!collection) {
+    console.log("No collection found for ", collection)
+    return []
+  }
+
+  const data = await collection.find({}).limit(100).toArray()
+
+  if (!data || data.length === 0) {
+    throw createError(404, "No User available data at the moment")
+  }
+
+  console.log(data)
+  return data
+}
+
 module.exports = {
   addnewUser,
   existingUser,
+  getAllUsers,
 }

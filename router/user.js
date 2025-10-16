@@ -1,17 +1,34 @@
 //user routing
 const router = require("express").Router()
 const controller = require("../controller/userController.js")
+const authenticate = require("../util/authenticate.js")
 const passport = require("passport")
 
-/**set up a default user route */
+/**
+ *  #swagger.ignore = true
+ */
 router.get("/", (req, res) => {
   res.send(`You are logged out`)
 })
 
-//signup and add a new user to our user data in our database
+/**all users */
+router.get("/allusers", authenticate.isAuthenticate, controller.allUsers)
+
+/**get user by id */
+router.get(
+  "/getuserById/:userId",
+  authenticate.isAuthenticate,
+  controller.userByID
+)
+
+/**
+ *  #swagger.ignore = true
+ */
 router.get("/login", passport.authenticate("github", { scope: ["user:email"] }))
 
-/**login or logout */
+/**
+ *  #swagger.ignore = true
+ */
 router.get(
   "/github/callback",
   passport.authenticate("github", {
@@ -48,7 +65,11 @@ router.get(
       </html>
     `)
   }
-) /**route to log user out and delete sessions */
+)
+
+/**
+ *  #swagger.ignore = true
+ */
 router.get("/logout", controller.logout)
 
 module.exports = router
